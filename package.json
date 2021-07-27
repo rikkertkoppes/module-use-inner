@@ -1,17 +1,22 @@
 {
     "name": "@rkmodules/use-inner",
     "version": "1.0.0",
-    "description": "",
+    "description": "internal state react hook that follows an outside state",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "tsc -w",
         "build": "tsc",
-        "prepublish": "npm run build"
+        "prepare": "npm run build"
     },
-    "author": "",
+    "author": "rikkert@rikkertkoppes.com",
     "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rikkertkoppes/module-use-inner"
+    },
+    "homepage": "https://github.com/rikkertkoppes/module-use-inner#readme",
     "peerDependencies": {
         "react": "^17.0.2"
     },
