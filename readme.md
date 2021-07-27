@@ -18,8 +18,12 @@ export const useInner = <T>(
 
 use `useInner` as a local shallow copy of some prop from outside. One place I use this a lot is where a default value is given through props (which may change), but there is also an inner state.
 
+```
+npm install @rkmodules/use-inner
+```
+
 ```typescript
-import useInner from "use-inner";
+import useInner from "@rkmodules/use-inner";
 ```
 
 # examples
