@@ -1,6 +1,6 @@
 {
     "name": "@rkmodules/use-inner",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "internal state react hook that follows an outside state",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -19,7 +19,7 @@
     },
     "homepage": "https://github.com/rikkertkoppes/module-use-inner#readme",
     "peerDependencies": {
-        "react": "^16.8.0"
+        "react": ">=16.8.0"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^5.14.1",
