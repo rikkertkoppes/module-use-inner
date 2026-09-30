@@ -7,12 +7,13 @@ import React from "react";
  * button press or enter
  */
 export const useInner = <T>(
-    outer: T
+    outer: T,
+    watch?: any[]
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
     let [inner, setInner] = React.useState<T>(outer);
     React.useEffect(() => {
         setInner(outer);
-    }, [outer]);
+    }, watch || [outer]);
     return [inner, setInner];
 };
 

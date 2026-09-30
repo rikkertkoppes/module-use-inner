@@ -16,6 +16,21 @@ function TestComponent({ value }: { value: string }) {
     );
 }
 
+function TestComponentWithWatch({
+    value,
+    watched,
+}: {
+    value: string;
+    watched: string;
+}) {
+    let [inner, setInner] = useInner(value, [watched]);
+    return (
+        <div data-testid="testcomponent" onClick={() => setInner("foo")}>
+            {inner}
+        </div>
+    );
+}
+
 describe("useInner", () => {
     test("initial state should be copied from value", () => {
         let { getByTestId } = render(<TestComponent value="moo" />);
@@ -33,6 +48,24 @@ describe("useInner", () => {
         let div = getByTestId("testcomponent");
         div.click();
         rerender(<TestComponent value="qux" />);
+        expect(div.textContent).toBe("qux");
+    });
+    test("adding a watch list should no longer watch the outer prop", () => {
+        let { getByTestId, rerender } = render(
+            <TestComponentWithWatch value="moo" watched="bar" />
+        );
+        let div = getByTestId("testcomponent");
+        div.click();
+        rerender(<TestComponentWithWatch value="qux" watched="bar" />);
+        expect(div.textContent).toBe("foo");
+    });
+    test("adding a watch list should watch the watch list", () => {
+        let { getByTestId, rerender } = render(
+            <TestComponentWithWatch value="moo" watched="bar" />
+        );
+        let div = getByTestId("testcomponent");
+        div.click();
+        rerender(<TestComponentWithWatch value="qux" watched="baz" />);
         expect(div.textContent).toBe("qux");
     });
 });

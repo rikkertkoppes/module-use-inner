@@ -4,12 +4,13 @@ This is a very simple wrapper around Reacts `useState`. The entire implementatio
 
 ```typescript
 export const useInner = <T>(
-    outer: T
+    outer: T,
+    watch?: any[]
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
     let [inner, setInner] = React.useState<T>(outer);
     React.useEffect(() => {
         setInner(outer);
-    }, [outer]);
+    }, watch || [outer]);
     return [inner, setInner];
 };
 ```
@@ -46,6 +47,24 @@ function LazyInput({ value, onChange }) {
 }
 ```
 
+## explicit watch list, useful for mapped props
+
+```tsx
+function LazyArray({ value, onChange }) {
+    let [inner, setInner] = useInner(value.toUpperCase(), [value]);
+    // inner now changes whenever value changes, but also on setInner. In this cases also when capitalization changes
+
+    const handleChange = (e) => {
+        setInner(e.target.value);
+    };
+    const handleBlur = (e) => {
+        onChange(inner);
+    };
+
+    return <input value={inner} onChange={handleChange} onBlur={handleBlur} />;
+}
+
 # project setup
 
 followed https://www.twilio.com/blog/2017/06/writing-a-node-module-in-typescript.html for project setup
+```
